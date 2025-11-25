@@ -1,6 +1,9 @@
 #version 120
 
+varying float lightIntensity;
+
 void main() {
-    // 버텍스 쉐이더에서 받아온 색상(회색)을 그대로 출력
-    gl_FragColor = gl_Color;
+    // 원래 색상에 밝기를 곱해서 입체감 표현
+    vec4 color = gl_Color;
+    gl_FragColor = vec4(color.rgb * lightIntensity, color.a);
 }
