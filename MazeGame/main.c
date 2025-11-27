@@ -13,27 +13,39 @@
 #endif
 
 /* ====== 1. 복잡한 미로 데이터 (1:벽, 0:길) ====== */
-#define MAP_SIZE 20 
+#define MAP_SIZE 31
 int maze_map[MAP_SIZE][MAP_SIZE] = {
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    {1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
-    {1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1},
-    {1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},
-    {1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1},
-    {1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1},
-    {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1},
-    {1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
-    {1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1},
-    {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
-    {1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1},
-    {1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
-    {1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1},
-    {1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
-    {1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
+    {1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1},
+    {1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
+    {1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1},
+    {1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+    {1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1},
+    {1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},
+    {1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1},
+    {1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1},
+    {1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1},
+    {1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1},
+    {1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
+    {1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1},
+    {1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},
+    {1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1},
+    {1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1},
+    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1},
+    {1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
 };
 
 /* ====== 구조체 및 전역 변수 ====== */
@@ -58,6 +70,7 @@ static const float MOVE_SPEED = 2.0f;
 static const float MOUSE_SENSITIVITY = 0.1f;
 static int last_time_ms = 0;
 
+/* ====== 유틸 함수 ====== */
 static void die(const char* msg) { fprintf(stderr, "%s\n", msg); exit(EXIT_FAILURE); }
 static void* xrealloc(void* p, size_t sz) { void* t = realloc(p, sz); if (!t) die("Out of memory"); return t; }
 static int parse_index_token(const char* tok) {
@@ -132,7 +145,7 @@ static void normalize_model(Model* m) {
     }
 }
 
-/* ====== 법선 벡터 계산 (쉐이더 조명 연산용) ====== */
+/* ====== 법선 벡터 계산 (지금은 쉐이더에서 사용 X, 그래도 유지) ====== */
 void compute_normal(Vec3 v1, Vec3 v2, Vec3 v3) {
     float ux = v2.x - v1.x; float uy = v2.y - v1.y; float uz = v2.z - v1.z;
     float vx = v3.x - v1.x; float vy = v3.y - v1.y; float vz = v3.z - v1.z;
@@ -141,7 +154,7 @@ void compute_normal(Vec3 v1, Vec3 v2, Vec3 v3) {
     float nz = ux * vy - uy * vx;
     float len = sqrt(nx * nx + ny * ny + nz * nz);
     if (len > 0.0f) {
-        glNormal3f(nx / len, ny / len, nz / len); // 여기서 Normal을 쉐이더로 보냄
+        glNormal3f(nx / len, ny / len, nz / len);
     }
 }
 
@@ -152,7 +165,7 @@ static void draw_model(const Model* m) {
         Vec3 v2 = m->verts[m->tris[i].b];
         Vec3 v3 = m->verts[m->tris[i].c];
 
-        compute_normal(v1, v2, v3); // 법선 전달
+        compute_normal(v1, v2, v3);
 
         glVertex3f(v1.x, v1.y, v1.z);
         glVertex3f(v2.x, v2.y, v2.z);
@@ -161,6 +174,7 @@ static void draw_model(const Model* m) {
     glEnd();
 }
 
+/* ====== 충돌 체크 (벽이면 1 리턴) ====== */
 int check_collision(float new_x, float new_z) {
     int grid_x = (int)(new_x + 0.5f);
     int grid_z = (int)(new_z + 0.5f);
@@ -169,13 +183,87 @@ int check_collision(float new_x, float new_z) {
     return 0;
 }
 
+/* ====== 오른쪽 위 미니맵 그리기 (직교 투영) ====== */
+static void draw_minimap(void) {
+    int mini_w = g_win_w / 4;
+    int mini_h = g_win_h / 4;
+    int mini_x = g_win_w - mini_w - 10;
+    int mini_y = g_win_h - mini_h - 10;
+
+    glViewport(mini_x, mini_y, mini_w, mini_h);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(0.0, (double)MAP_SIZE, 0.0, (double)MAP_SIZE, -1.0, 1.0);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_CULL_FACE);
+    glUseProgram(0);
+
+    glBegin(GL_QUADS);
+    glColor3f(0.05f, 0.05f, 0.05f);
+    glVertex2f(0.0f, 0.0f);
+    glVertex2f((float)MAP_SIZE, 0.0f);
+    glVertex2f((float)MAP_SIZE, (float)MAP_SIZE);
+    glVertex2f(0.0f, (float)MAP_SIZE);
+    glEnd();
+
+    for (int z = 0; z < MAP_SIZE; ++z) {
+        for (int x = 0; x < MAP_SIZE; ++x) {
+            if (maze_map[z][x] == 1) {
+                float x0 = (float)x;
+                float z0 = (float)z;
+                float x1 = x0 + 1.0f;
+                float z1 = z0 + 1.0f;
+
+                glBegin(GL_QUADS);
+                glColor3f(0.8f, 0.8f, 0.8f);
+                glVertex2f(x0, z0);
+                glVertex2f(x1, z0);
+                glVertex2f(x1, z1);
+                glVertex2f(x0, z1);
+                glEnd();
+            }
+        }
+    }
+
+    float px = cam_x;
+    float pz = cam_z;
+    float r = 0.3f;
+
+    glBegin(GL_TRIANGLES);
+    glColor3f(1.0f, 0.2f, 0.2f);
+    glVertex2f(px, pz + r);
+    glVertex2f(px - r * 0.6f, pz - r);
+    glVertex2f(px + r * 0.6f, pz - r);
+    glEnd();
+
+    glLineWidth(2.0f);
+    glBegin(GL_LINE_LOOP);
+    glColor3f(1.0f, 1.0f, 1.0f);
+    glVertex2f(0.0f, 0.0f);
+    glVertex2f((float)MAP_SIZE, 0.0f);
+    glVertex2f((float)MAP_SIZE, (float)MAP_SIZE);
+    glVertex2f(0.0f, (float)MAP_SIZE);
+    glEnd();
+    glLineWidth(1.0f);
+
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
+}
+
+/* ====== 메인 화면 렌더링 ====== */
 static void display(void) {
+    glViewport(0, 0, g_win_w, g_win_h);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
     glMatrixMode(GL_PROJECTION); glLoadIdentity();
     gluPerspective(45.0, (float)g_win_w / g_win_h, 0.1, 100.0);
     glMatrixMode(GL_MODELVIEW); glLoadIdentity();
 
-    // 1인칭 카메라 설정
     float dir_x = cos(cam_pitch * M_PI / 180.0f) * cos(cam_yaw * M_PI / 180.0f);
     float dir_y = sin(cam_pitch * M_PI / 180.0f);
     float dir_z = cos(cam_pitch * M_PI / 180.0f) * sin(cam_yaw * M_PI / 180.0f);
@@ -184,23 +272,20 @@ static void display(void) {
         cam_x + dir_x, cam_y + dir_y, cam_z + dir_z,
         0.0, 1.0, 0.0);
 
-    // 쉐이더 사용 시작
     if (g_programID != 0) glUseProgram(g_programID);
 
-    // 미로 그리기
     for (int z = 0; z < MAP_SIZE; ++z) {
         for (int x = 0; x < MAP_SIZE; ++x) {
             if (maze_map[z][x] == 1) {
                 glPushMatrix();
                 glTranslatef((float)x, 0.0f, (float)z);
-                glColor3f(0.8f, 0.8f, 0.8f); // 벽 색상
+                glColor3f(0.8f, 0.8f, 0.8f);
                 draw_model(&g_model);
                 glPopMatrix();
             }
         }
     }
 
-    // 바닥 그리기
     glBegin(GL_QUADS);
     glNormal3f(0.0f, 1.0f, 0.0f);
     glColor3f(0.3f, 0.3f, 0.3f);
@@ -210,10 +295,16 @@ static void display(void) {
     glVertex3f(-10.0f, -0.5f, MAP_SIZE + 10.0f);
     glEnd();
 
-    glUseProgram(0);
+    if (g_programID != 0) {
+        glUseProgram(0);
+    }
+
+    draw_minimap();
+
     glutSwapBuffers();
 }
 
+/* ====== 마우스 룩 ====== */
 static void passive_motion(int x, int y) {
     if (!is_mouse_captured) return;
     int dx = x - g_win_w / 2;
@@ -227,6 +318,7 @@ static void passive_motion(int x, int y) {
     }
 }
 
+/* ====== 키보드 입력 ====== */
 static void keyboard(unsigned char key, int x, int y) {
     if (key == 27) exit(0);
     if (key == 'w' || key == 'W') keyW = 1;
@@ -239,6 +331,7 @@ static void keyboard(unsigned char key, int x, int y) {
         else glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
     }
 }
+
 static void keyboard_up(unsigned char key, int x, int y) {
     if (key == 'w' || key == 'W') keyW = 0;
     if (key == 's' || key == 'S') keyS = 0;
@@ -246,6 +339,7 @@ static void keyboard_up(unsigned char key, int x, int y) {
     if (key == 'd' || key == 'D') keyD = 0;
 }
 
+/* ====== 이동/갱신 ====== */
 static void idle_update(void) {
     int now = glutGet(GLUT_ELAPSED_TIME);
     if (last_time_ms == 0) last_time_ms = now;
@@ -272,16 +366,18 @@ static void idle_update(void) {
     glutPostRedisplay();
 }
 
+/* ====== 리쉐이프 ====== */
 static void reshape(int w, int h) {
     g_win_w = w; g_win_h = h;
     glViewport(0, 0, w, h);
 }
 
+/* ====== main ====== */
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
     glutInitWindowSize(800, 800);
-    glutCreateWindow("3D Maze - Lighting Mode");
+    glutCreateWindow("3D Maze - Horror Flashlight + Minimap");
 
     GLenum e = glewInit();
     if (e != GLEW_OK) die("glewInit failed");
@@ -289,7 +385,6 @@ int main(int argc, char** argv) {
     load_obj("cube.obj", &g_model);
     normalize_model(&g_model);
 
-    // 파일명 반드시 vertex.glsl, fragment.glsl
     g_programID = load_shaders("vertex.glsl", "fragment.glsl");
 
     glEnable(GL_DEPTH_TEST);
